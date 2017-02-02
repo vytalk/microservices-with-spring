@@ -1,8 +1,7 @@
 package lt.vytalk.spring.microservices.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Team {
@@ -16,6 +15,10 @@ public class Team {
     private String name;
 
     private String mascotte;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="teamId")
+    private Set<Player> players;
 
     public Long getId() {
         return id;
@@ -48,4 +51,13 @@ public class Team {
     public void setMascotte(String mascotte) {
         this.mascotte = mascotte;
     }
+
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
+    }
+
 }
